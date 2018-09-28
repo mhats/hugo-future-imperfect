@@ -8,18 +8,18 @@
       {{ $.Scratch.Set "jsFiles" false }}
     {{ end }}
 
-    {{ if (not .Params.disable_highlight) }}
-      {{ $highVer := .Site.Params.highlightjsVersion }}
-      {{ $highCDN := (.Site.Params.highlightjsCDN | default "//cdn.bootcss.com") }}
-      {{ if (not (eq $highVer "")) }}
-        <script src="{{ $highCDN }}/highlight.js/{{ $highVer }}/highlight.min.js"></script>
-        {{ $.Scratch.Set "highLangs" .Site.Params.highlightjsLang }}
-        {{ range .Params.highlightjsLang }}{{ $.Scratch.Add "highLangs" . }}{{ end }}
-        {{ range ($.Scratch.Get "highLangs") }}
-        <script src="{{ $highCDN }}/highlight.js/{{ $highVer }}/languages/{{ . }}.min.js"></script>{{ end }}
-        <script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
-      {{ end }}
-    {{ end }}
+    <!-- {{ if (not .Params.disable_highlight) }} -->
+    <!--   {{ $highVer := .Site.Params.highlightjsVersion }} -->
+    <!--   {{ $highCDN := (.Site.Params.highlightjsCDN | default "//cdn.bootcss.com") }} -->
+    <!--   {{ if (not (eq $highVer "")) }} -->
+    <!--     <script src="{{ $highCDN }}/highlight.js/{{ $highVer }}/highlight.min.js"></script> -->
+    <!--     {{ $.Scratch.Set "highLangs" .Site.Params.highlightjsLang }} -->
+    <!--     {{ range .Params.highlightjsLang }}{{ $.Scratch.Add "highLangs" . }}{{ end }} -->
+    <!--     {{ range ($.Scratch.Get "highLangs") }} -->
+    <!--     <script src="{{ $highCDN }}/highlight.js/{{ $highVer }}/languages/{{ . }}.min.js"></script>{{ end }} -->
+    <!--     <script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script> -->
+    <!--   {{ end }} -->
+    <!-- {{ end }} -->
     <!-- If the value "default" is passed into the param then we will first
      load the standard js files associated with the theme -->
     {{ if or (in ($.Scratch.Get "jsFiles") "default") (eq ($.Scratch.Get "jsFiles") false) }}
@@ -39,8 +39,10 @@
       {{ end }}
     {{ end }}
 
-    <!-- This is called by default since this theme uses highlight.js -->
-    <script>hljs.initHighlightingOnLoad();</script>
-      {{ partial "footer_mathjax" . }}
+    <!-- KaTeX -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.css" integrity="sha384-D+9gmBxUQogRLqvARvNLmA9hS2x//eK1FhVb9PiU86gmcrBrJAQT8okdJ4LMp2uv" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.js" integrity="sha384-483A6DwYfKeDa0Q52fJmxFXkcPCFfnXMoXblOkJ4JcA8zATN6Tm78UNL72AKk+0O" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/contrib/auto-render.min.js" integrity="sha384-yACMu8JWxKzSp/C1YV86pzGiQ/l1YUfE8oPuahJQxzehAjEt2GiQuy/BIvl9KyeF" crossorigin="anonymous"
+    onload="renderMathInElement(document.body);"></script>
   </body>
 </html>

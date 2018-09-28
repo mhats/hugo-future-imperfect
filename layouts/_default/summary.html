@@ -1,0 +1,13 @@
+{{ partial "general-title" . }}
+
+    <!-- Main -->
+    <div id="main">
+        <article class="post">
+
+            {{ $.Scratch.Set "h1" true }}
+            {{ .Render "header" }}
+            <div id="content">
+                {{ .Summary }}
+            </div>
+        </article>
+    </div>
